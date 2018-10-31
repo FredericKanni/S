@@ -3,12 +3,17 @@
 
 import { Template } from 'meteor/templating';
 import { Tasks } from '../api/Templates.js';
+import { ReactiveDict } from 'meteor/reactive-dict';
 import './template.js';
 import './body.html';
 
 
 
+Template.body.onCreated(function bodyOnCreated() {
 
+  this.state = new ReactiveDict();
+
+});
 
 
 Template.body.helpers({
@@ -30,26 +35,26 @@ Template.body.helpers({
     
       },
 
-      bbb() {
+      // bbb() {
 
 
         
         
-                const instance = Template.instance();
+      //           const instance = Template.instance();
             
-                if (instance.state.get('hideCompleted')) {
+      //           if (instance.state.get('hideCompleted')) {
             
-                  // If hide completed is checked, filter tasks
+      //             // If hide completed is checked, filter tasks
             
-                  return Tasks.find({ checked: { $ne: false } }, { sort: { createdAt: -1 } });
+      //             return Tasks.find({ checked: { $ne: false } }, { sort: { createdAt: -1 } });
             
-                }
+      //           }
             
-                // Otherwise, return all of the tasks
+      //           // Otherwise, return all of the tasks
             
-                return Tasks.find({}, { sort: { createdAt: -1 } });
+      //           return Tasks.find({}, { sort: { createdAt: -1 } });
             
-              },
+      //         },
 
 
 
@@ -82,10 +87,32 @@ Template.body.helpers({
       },
 
 
+      incompleteCount() {
 
+        return Tasks.find({ checked: { $ne: true } }).count();
+    
+      },
 
+      tak() {
 
+        const instance = Template.instance();
+    
 
+        //ici hidecomplete prend la valeur true ou false c pour sa qu il console une doir sur deux 
+        if (instance.state.get('hideCompleted')) {
+    
+          // If hide completed is checked, filter tasks
+    console.log("mange");
+          // return Tasks.find({ checked: { $ne: true } }, { sort: { createdAt: -1 } });
+    
+        }  
+        return Tasks.find({ checked: { $ne: true } }, { sort: { createdAt: -1 } });
+      },
+
+      tuk() {
+
+        return Tasks.find({ checked: { $ne: false } }, { sort: { createdAt: -1 } });
+      },
 
   
   });
@@ -136,23 +163,29 @@ Template.body.helpers({
 
 
 
-
-
-
-
-
-
-
-
-    'click .activation'(event) {
-  
-      // Prevent default browser form submit
-
-      event.preventDefault();
-      console.log('desactivé');
-
-
+    'change .hide-completed input'(event, instance) {
+      console.log('change');
+      instance.state.set('hideCompleted', event.target.checked);
+      // console.log(event.target.checked);
+      // console.log(event.target);
+      console.log(instance.state);
     },
+
+
+
+
+
+
+
+    // 'click .activation'(event) {
+  
+    //   // Prevent default browser form submit
+
+    //   event.preventDefault();
+    //   console.log('desactivé');
+
+
+    // },
 
 
     'submit .new-task'(event) {

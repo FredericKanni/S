@@ -1,6 +1,6 @@
 <body>
     <h1>Welcome to Meteor!</h1>
-  
+    <h1>Todo List ({{incompleteCount}})</h1>
     {{> hello}}
 
     <ul>
@@ -21,8 +21,8 @@
 
       </form>
 
-
-      <ul>
+      list actives
+      <!-- <ul>
 
         {{#each tasks}}
   
@@ -30,16 +30,30 @@
   
         {{/each}}
   
+      </ul> -->
+
+      <ul>
+
+        {{#each tuk}}
+  
+          {{> plop}}
+          <!-- CE PETIT O PERMET DE VOIR LA DIFFERENCE ENTRE 
+        TUK ET TASK TUK RENVOIE TROIE O ALORS QUE TASKS 4O 
+        DONC DANS PLOP ENSUITE IL FAUT UTILISER DES IF POUR FIXER LE ZAFFAIR 
+          <p>o</p> -->
+  
+        {{/each}}
+  
       </ul>
 
 
-      inverse
+      list desactives
       <ul>
-
-        {{#each bbb}}
+<!-- cest cette formulaition qu il faut utilise -->
+        {{#each tak}}
   
-          {{> ggg}}
-  
+          <!-- {{> ggg}} -->
+          <p class="text">{{text}}</p>
         {{/each}}
   
       </ul>
