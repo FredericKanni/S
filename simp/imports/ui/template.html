@@ -1,0 +1,113 @@
+<template name="hello">
+    <button>Click Me</button>
+    <p>You've pressed the button {{counter}} times.</p>
+  </template>
+
+
+  
+<template name="task">
+
+
+  <!-- <li class="{{#if checked}}checked{{/if}}">  -->
+  
+   
+    <!-- <li class="  {{#unless checked}}checked{{/unless}}"> -->
+      <!-- <li class="  {{#unless checked}}checked{{/unless}}"> -->
+        <li class="{{#if checked}}checked{{/if}}">
+<!-- plop -->
+<!-- {{ checked}} -->
+
+<!-- UNLESS C EST L INVERSE DE IF -->
+<!-- donc  si checked vaut faut alors il fait ce qu il y a entre les parenthese  -->
+{{#unless checked}}activer{{/unless}}
+
+  </li>
+
+
+ 
+  <!-- {{#unless checked}}checked{{/unless}} -->
+
+  <!-- <li class="{{#if checked}}checked{{/if}}"> -->
+    <li class="  {{#unless checked}}checked{{/unless}}">
+    <button class="delete">&times;</button>
+
+
+<!-- BOUTTON DESACTIVE -->
+    <!-- <button class="desac">desactivé</button> -->
+    <!-- BOUTTON ACTIVE -->
+    <!-- <button class="ac">activé</button> -->
+
+   
+  
+
+    <label class="hide-completed">
+
+      <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
+
+
+
+
+    </label>
+
+    <span class="text">{{text}}</span>
+
+  </li>
+  
+  </template>
+
+
+
+
+
+  <template name="ggg">
+
+    <li>
+        <span class="text ">{{text}}</span>
+    </li>
+  
+
+  </template>
+
+
+
+ 
+<template   name="plop">
+  {{#if checked}}
+  <!-- <li class="{{#if checked}}checked{{/if}}">
+
+    <button class="delete">&times;</button>
+
+ 
+
+    <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
+
+ 
+
+    <span class="text ">{{text}}</span>
+
+  </li> -->
+
+  <li >
+
+    <!-- <button class="delete">&times;</button> -->
+
+ 
+
+    <!-- <input type="checkbox" checked="{{checked}}" class="toggle-checked" /> -->
+
+ 
+
+    <span class="text ">{{text}}</span>
+
+  </li>
+
+
+
+
+
+
+
+
+  {{/if}}
+  </template>
+ 

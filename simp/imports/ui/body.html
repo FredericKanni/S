@@ -1,0 +1,49 @@
+<body>
+    <h1>Welcome to Meteor!</h1>
+  
+    {{> hello}}
+
+    <ul>
+<!-- POUR CHAQUES tasks DANS LA COLLECTION Tasks -->
+        {{#each tasks}}
+  <!-- reproduit la template -->
+          {{> task}}
+  
+        {{/each}}
+  
+      </ul>
+
+
+
+      <form class="new-task">
+
+        <input type="text" name="text" placeholder="Type to add new tasks" />
+
+      </form>
+
+
+      <ul>
+
+        {{#each tasks}}
+  
+          {{> plop}}
+  
+        {{/each}}
+  
+      </ul>
+
+
+      inverse
+      <ul>
+
+        {{#each bbb}}
+  
+          {{> ggg}}
+  
+        {{/each}}
+  
+      </ul>
+
+  </body>
+
+   
