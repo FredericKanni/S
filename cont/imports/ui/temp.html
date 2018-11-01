@@ -1,0 +1,94 @@
+<template name="hello">
+    <button>Click Me</button>
+    <p>You've pressed the button {{counter}} times.</p>
+  </template>
+
+
+
+
+
+
+
+
+<!-- FORMULAIIRE AJOUT DE NOTES -->
+  <template name="form_new_note">
+  
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form class="js-new-note">
+                            <input type="text" class="form-control" name="title" id="" placeholder="titre de la note">
+                            <textarea name="text" class="form-control resize-vertical" id="" cols="80" rows="4"></textarea>
+                            <button type="submit" class="btn btn-primary" name="button">Ajouter</button>
+                        </form>
+                    </div>
+            </div>
+        </div>
+    </div>
+  </template>
+
+
+
+  
+
+
+<!-- LISTE DE NOTES -->
+<template name="list_note">
+  
+     <h1>Liste des notes</h1> 
+    <!-- {{#each notes}} -->
+    {{#each note in notes}}
+    <!-- {{note.title}} -->
+    <!-- {{> single_note note }} -->
+    
+     {{> single_note note=note }}
+    {{/each}}
+      </template>
+
+
+
+      
+<!-- LISTE DE NOTES -->
+<template name="single_note">
+        <!-- {{this}} -->
+  
+
+      <div class="card btn  panel-default js-edit-note"  style="cursor:pointer;">
+
+            <div class=" bg-secondary panel-heading">
+                <h3 class="card-title">{{note.title}}</h3>
+            </div>
+            <div class="panel-body">
+                <p>{{note.text}} </p>
+            </div>
+    </div>
+     
+      
+</template>
+
+
+
+<template name="modal_edit_note">
+        <div class="modal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Modal title</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Modal body text goes here.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+     
+      
+</template>
