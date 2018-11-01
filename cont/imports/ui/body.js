@@ -67,3 +67,12 @@ Template.single_note.events({
     },
   });
 
+   
+Template.accueil.events({
+
+    'click .js-logout'(event,instance) {
+      Meteor.logout();
+
+
+    },
+});
