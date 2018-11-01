@@ -22,6 +22,7 @@ Template.form_new_note.events({
 Notes.insert({
 title:titleVal,
 text:textVal,
+ownerId:Meteor.userId(),
 createdAt: new Date(),
 });
 
@@ -35,8 +36,10 @@ event.target.text.value = '';
    
  Template.list_note.helpers({
      notes(){
-        return Notes.find().fetch();
 
+        return Notes.find({ownerId:Meteor.userId()}).fetch();
+//  return Notes.find().fetch();
+// va chercher dans la list des note ceux qui ont on owner id  qui correspont a Meteor.userId()
      },
     
     
