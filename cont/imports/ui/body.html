@@ -2,6 +2,25 @@
     <h1 class="text-center">APPLICATION NOTES</h1>
   
     <!-- {{> hello}} -->
-    {{> form_new_note}}
-    {{> list_note}}
+    <!-- {{> form_new_note}} -->
+
+
+    {{#if currentUser}}
+    {{> accueil}}
+    {{else}}
+    {{> atForm}}
+    {{/if}}
+
+
+
+
+
   </body>
+
+
+  
+  <template name="accueil">
+      {{> form_new_note}}
+      {{> list_note}}
+
+    </template>
