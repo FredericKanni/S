@@ -19,7 +19,7 @@ import './template.html';
 Template.task.events({
 
   'click .toggle-checked'() {
-
+    console.log('checkbox');
     // Set the checked property to the opposite of its current value
 // console.log(this.checked);
     Tasks.update(this._id, {

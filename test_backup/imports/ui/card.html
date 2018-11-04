@@ -1,0 +1,35 @@
+<template name="carte">
+        
+        <div class="card" style="width: 18rem;">
+            <!-- RAJOUTE DE LA CROIX POUR EFFACER -->
+                <button type="button" class="delete"  data-toggle="modal" data-target="#exampleModal3"   data-id="{{_id}}">
+                        <span aria-hidden="true">&times;</span>
+                 </button>
+
+                <img class="card-img-top" src="{{image}}" height="300" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title text-center">{{title}}</h5> <!--TO DO VARIABLE FOR HREF AND ID COLLAPSE-->
+                  <a class="btn btn-primary d-flex justify-content-center" data-toggle="collapse" href="#{{_id}}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Plus d'infos
+                  </a>
+                  <div class="collapse" id="{{_id}}">
+                    <div class="card card-body">
+                      <p class="card-text">{{text}}</p>
+                      <p class="card-text">{{date}}</p>
+                      <p class="card-text">{{horaire}}</p>
+                      <p class="card-text">{{duree}}</p>
+                      <p class="card-text">{{dispo}}</p>
+                      <p class="card-text">{{prix}}</p>
+                    </div>
+                  </div>
+
+                  <div class="row d-flex justify-content-center my-2">
+                    <span class="mx-1">{{> modal2}}</span>
+                    <span>{{> modal3}}</span>
+                  </div>
+                  
+                </div>
+              </div>
+
+
+</template>

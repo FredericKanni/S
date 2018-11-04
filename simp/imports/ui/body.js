@@ -3,17 +3,17 @@
 
 import { Template } from 'meteor/templating';
 import { Tasks } from '../api/Templates.js';
-import { ReactiveDict } from 'meteor/reactive-dict';
+// import { ReactiveDict } from 'meteor/reactive-dict';
 import './template.js';
 import './body.html';
 
 
 
-Template.body.onCreated(function bodyOnCreated() {
+// Template.body.onCreated(function bodyOnCreated() {
 
-  this.state = new ReactiveDict();
+//   this.state = new ReactiveDict();
 
-});
+// });
 
 
 Template.body.helpers({
@@ -163,13 +163,13 @@ Template.body.helpers({
 
 
 
-    'change .hide-completed input'(event, instance) {
-      console.log('change');
-      instance.state.set('hideCompleted', event.target.checked);
-      // console.log(event.target.checked);
-      // console.log(event.target);
-      console.log(instance.state);
-    },
+    // 'change .hide-completed input'(event, instance) {
+    //   console.log('change');
+    //   instance.state.set('hideCompleted', event.target.checked);
+    //   // console.log(event.target.checked);
+    //   // console.log(event.target);
+    //   console.log(instance.state);
+    // },
 
 
 
