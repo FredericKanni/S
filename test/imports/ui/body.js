@@ -10,6 +10,19 @@ import { Ateliers } from '../api/Ateliers.js';
 import { Reserves } from '../api/Reserves.js';
 
 
+
+Template.carte.events({
+  'click .delres': function() {
+  Reserves.remove(this._id);
+},
+
+
+});
+
+
+
+
+
 Template.body.helpers({
     ateliers: function(){
         // return Ateliers.find().fetch(); 
@@ -33,6 +46,13 @@ Template.body.helpers({
   },
 
   });
+
+  Template.cartereservation.helpers({
+    reser: function(){
+        return Reserves.find().fetch(); 
+    }
+  });
+
 
   Template.body.helpers({
     reserves: function(){
@@ -99,7 +119,8 @@ Template.body.events({
       // Prevent default browser form submit
       event.preventDefault();
 
-
+      const hidden = document.querySelector('#edit-id');
+      idAtelier=hidden.value;
       // Get value from form element
       const target = event.target;
       const Name= target.Name.value;
@@ -108,6 +129,17 @@ Template.body.events({
       const Email = target.Email.value;
       const Place = target.Place.value;
 
+
+
+      console.log(target);
+      console.log(Name);
+
+      console.log(Prenom);
+      console.log(Tel);
+     
+      console.log(Email);
+      console.log(Place);
+      console.log(idAtelier);
       // Insert a task into the collection
 
       Reserves.insert({
@@ -117,7 +149,7 @@ Template.body.events({
         Tel,
         Email,
         Place,
-
+        idAtelier,
         createdAt: new Date(), // current time
   
       });
@@ -211,3 +243,18 @@ Template.modal2.events({
 
 
 
+
+//QUAND ON CLICK SUR LE BTN RESERVE DE LA CARTE RECUPERE L ID DE LA CARTE ET LA STOCK
+  Template.carte.events({
+    'click .res': function(event) {
+    // Reserves.remove(this._id);
+    const target = event.target;
+    console.log(target);
+    console.log(this._id);
+
+    const hidden = document.querySelector('#edit-id');
+    hidden.value =this._id;
+  },
+  
+  
+  });
