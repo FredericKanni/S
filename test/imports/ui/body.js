@@ -29,9 +29,9 @@ Template.body.helpers({
   desactive() {
     return Ateliers.find( {  checked: { $ne: false } });
   },
-  ct() {
-    return Ateliers.find( {  checked: { $ne: false } }).count();
-  },
+  // ct() {
+  //   return Ateliers.find( {  checked: { $ne: false } }).count();
+  // },
 
   });
 
@@ -119,11 +119,15 @@ Template.body.events({
     'submit .new-reserve'(event) {
       // Prevent default browser form submit
       event.preventDefault();
-      const hidden2 = document.querySelector('#edit-ownerid');
-      ownerId=hidden2.value;
+    
       const hidden = document.querySelector('#edit-id');
       idAtelier=hidden.value;
       const atelier = Ateliers.findOne({_id:hidden.value});
+      
+      const ownerId =atelier.ownerId;
+      const date =atelier.date;
+      const title =atelier.title;
+
       // Get value from form element
       const target = event.target;
       const Name= target.Name.value;
@@ -143,22 +147,27 @@ Template.body.events({
         console.log('reservation reussi');
          alert("reservation reussie!");
 // Mise à jour de la collection
+
+            Reserves.insert({
+                    
+              Name,
+              Prenom,
+              Tel,
+              Email,
+              Place,
+              idAtelier,
+              ownerId,
+              date,
+              title,
+              createdAt: new Date(), // current time
+            });
+
       }
       if( parseInt(Place) > parseInt(Placedispo)){
         alert("Pas assez de places disponibles!");
 
       }
-      Reserves.insert({
-        
-        Name,
-        Prenom,
-        Tel,
-        Email,
-        Place,
-        idAtelier,
-        ownerId,
-        createdAt: new Date(), // current time
-      });
+     
       // Clear form
       target.Name.value = '';
       target.Prenom.value = '';
@@ -250,9 +259,18 @@ Template.modal2.events({
     const target = event.target;
     const hidden = document.querySelector('#edit-id');
     hidden.value =this._id;
+    
     const atelier = Ateliers.findOne({_id:hidden.value});
+
     const hidden2 = document.querySelector('#edit-ownerid');
     hidden2.value=atelier.ownerId;
+
+    // const hidden3 = document.querySelector('#date-atelier');
+    // hidden3.value=atelier.date;
+
+    // const hidden4 = document.querySelector('#nom-atelier');
+    // hidden4.value=atelier.title;
+
   },
     'click .delete': function(event) {
       // Reserves.remove(this._id);
