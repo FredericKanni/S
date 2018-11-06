@@ -29,6 +29,12 @@ Template.body.helpers({
         return Ateliers.find({ownerId: Meteor.userId()}).fetch(); 
     },
 
+
+
+
+
+    
+
     ateliersparticulier: function(){
       // return Ateliers.find().fetch(); 
       return Ateliers.find({ownerId}).fetch(); 
@@ -56,7 +62,7 @@ Template.body.helpers({
 
   Template.cartereservation.helpers({
     reser: function(){
-        return Reserves.find().fetch(); 
+        return Reserves.find({ownerId: Meteor.userId()}).fetch(); 
     }
   });
 
@@ -88,19 +94,19 @@ Template.body.events({
       
       const target = event.target;
 
-      const atnomcuisinier= target.nomcuisinier.value;
-      const atprenomcuisinier = target.prenomcuisinier.value;
-      const atspécialitécuisinier = target.spécialitécuisinier.value;
+      const nomcuisinier= target.modal1nomcuisinier.value;
+      const prenomcuisinier = target.modal1prenomcuisinier.value;
+      const spécialitécuisinier = target.modal1spécialitécuisinier.value;
 
-      const title= target.title.value;
-      const text = target.text.value;
-      const date = target.date.value;
-      const duree = target.duree.value;
-      const horaire = target.horaire.value;
-      const dispo = target.dispo.value;
-      const prix = target.prix.value;
-      const image = target.image.value;
-      const max = target.dispo.value;
+      const title= target.modal1title.value;
+      const text = target.modal1text.value;
+      const date = target.modal1date.value;
+      const duree = target.modal1duree.value;
+      const horaire = target.modal1horaire.value;
+      const dispo = target.modal1dispo.value;
+      const prix = target.modal1prix.value;
+      const image = target.modal1image.value;
+      const max = target.modal1dispo.value;
       const reserve = 0;
       // console.log(atnomcuisinier);
       // console.log(atprenomcuisinier);
@@ -112,9 +118,9 @@ Template.body.events({
       Ateliers.insert({
         
 
-        atnomcuisinier,
-        atprenomcuisinier,
-        atspécialitécuisinier,
+        nomcuisinier,
+        prenomcuisinier,
+        spécialitécuisinier,
         title,
         text,
         date,
@@ -137,18 +143,18 @@ Template.body.events({
       // Clear form
 
 
-       target.nomcuisinier.value= '';
-       target.prenomcuisinier.value= '';
-      target.spécialitécuisinier.value= '';
+       target.modal1nomcuisinier.value= '';
+       target.modal1prenomcuisinier.value= '';
+      target.modal1spécialitécuisinier.value= '';
 
-      target.title.value = '';
-      target.text.value = '';
-      target.date.value = '';
-      target.horaire.value = '';
-      target.duree.value = '';
-      target.dispo.value = '';
-      target.prix.value = '';
-      target.image.value = '';
+      target.modal1title.value = '';
+      target.modal1text.value = '';
+      target.modal1date.value = '';
+      target.modal1horaire.value = '';
+      target.modal1duree.value = '';
+      target.modal1dispo.value = '';
+      target.modal1prix.value = '';
+      target.modal1image.value = '';
     },
 
     /************************/
@@ -157,6 +163,9 @@ Template.body.events({
   
       // Prevent default browser form submit
       event.preventDefault();
+      const hidden2 = document.querySelector('#edit-ownerid');
+      ownerId=hidden2.value;
+
 
       const hidden = document.querySelector('#edit-id');
       idAtelier=hidden.value;
@@ -212,17 +221,18 @@ Template.body.events({
       }
 // const dispo =  atelier.dispo - Place;
 // console.log(dispo);
-      // Reserves.insert({
+      Reserves.insert({
         
-      //   Name,
-      //   Prenom,
-      //   Tel,
-      //   Email,
-      //   Place,
-      //   idAtelier,
-      //   createdAt: new Date(), // current time
+        Name,
+        Prenom,
+        Tel,
+        Email,
+        Place,
+        idAtelier,
+        ownerId,
+        createdAt: new Date(), // current time
   
-      // });
+      });
 
       // Clear form
       target.Name.value = '';
@@ -241,28 +251,35 @@ Template.body.events({
 
         //Récupère valeur dans l'élément form (formulaire)
         const target = event.target;
+console.log(target);
+        const savenomcuisinier = target.modal2nomcuisinier.value;
+        const saveprenomcuisinier = target.modal2prenomcuisinier.value;
+        const savespécialitécuisinier = target.modal2spécialitécuisinier.value;
 
-        const Enomcuisinier = target.Enomcuisinier.value;
-        const Eprenomcuisinier = target.Eprenomcuisinier.value;
-        const Espécialitécuisinier = target.Espécialitécuisinier.value;
-
-       
-        const Etitle = target.Etitle.value;
-        const Etext = target.Etext.value;
-        const Edate = target.Edate.value;
-        const Ehoraire = target.Ehoraire.value;
-        const Eduree = target.Eduree.value;
-        const Edispo = target.Edispo.value;
-        const Eprix = target.Eprix.value;
-        const Eimage = target.Eimage.value
+        console.log(target);
+        const savetitle = target.modal2title.value;
+        const savetext = target.modal2text.value;
+        const savedate = target.modal2date.value;
+        const savehoraire = target.modal2horaire.value;
+        const saveduree = target.modal2duree.value;
+        const savedispo = target.modal2dispo.value;
+        const saveprix = target.modal2prix.value;
+        const saveimage = target.modal2image.value
         const id = target.editId.value;
         
         //Mise à jour de la collection
         Ateliers.update(id, {
-          $set:{title: Etitle, text: Etext, horaire: Ehoraire, duree: Eduree, date: Edate, dispo: Edispo, prix: Eprix, image: Eimage,
-            atnomcuisinier:Enomcuisinier,
-            atprenomcuisinier:Eprenomcuisinier,
-            atspécialitécuisinier:Espécialitécuisinier,
+          $set:{title: savetitle,
+             text: savetext,
+              horaire: savehoraire, 
+              duree: saveduree, 
+              date: savedate, 
+              dispo: savedispo, 
+            prix: saveprix, 
+            image: saveimage,
+            nomcuisinier:savenomcuisinier,
+            prenomcuisinier:saveprenomcuisinier,
+            spécialitécuisinier:savespécialitécuisinier,
           }
           });
 
@@ -315,11 +332,13 @@ Template.modal2.events({
       eight.value = atelier.prix;
       nime.value = atelier.image;
 
-      ten.value = atelier.atnomcuisinier;
-      eleven.value = atelier.atprenomcuisinier;
-      twelve.value = atelier.atspécialitécuisinier;
+      ten.value = atelier.nomcuisinier;
+      eleven.value = atelier.prenomcuisinier;
+      twelve.value = atelier.spécialitécuisinier;
 
     
+      
+
 
       id.value = idAtelier;
 
@@ -360,7 +379,16 @@ Template.modal2.events({
 
     const atelier = Ateliers.findOne({_id:hidden.value});
     console.log(atelier.dispo);
+    console.log(atelier.ownerId);
+    const hidden2 = document.querySelector('#edit-ownerid');
+    hidden2.value=atelier.ownerId;
+
+
+
   },
+
+
+
 
 
   'click .delete': function(event) {
@@ -379,3 +407,66 @@ Template.modal2.events({
   
   
   });
+
+
+
+
+
+
+
+  Template.carte.events({
+
+    'click .toggle-checked'(event) {
+  
+      const target = event.target;
+       console.log(target);
+      const suivanttarget = event.target.nextSibling;
+     console.log(suivanttarget);
+      
+      // Set the checked property to the opposite of its current value
+//  console.log('checkbox');
+ console.log(this.checked);
+      Ateliers.update(this._id, {
+  
+        $set: { checked: ! this.checked },
+  
+      });
+      // console.log('updatedchecked');
+      // console.log(this.checked);
+    },
+  
+  });
+  
+
+
+
+  
+Template.cartereservation.events({
+
+  'click .delres'(event) {
+
+    const target = event.target;
+     console.log(target);
+     console.log(this._id);
+     Reserves.remove(this._id);
+
+
+
+
+     
+  //   const suivanttarget = event.target.nextSibling;
+  //  console.log(suivanttarget);
+    
+    // Set the checked property to the opposite of its current value
+//  console.log('checkbox');
+// console.log(this.checked);
+//     Ateliers.update(this._id, {
+
+//       $set: { checked: ! this.checked },
+
+//     });
+    // console.log('updatedchecked');
+    // console.log(this.checked);
+  },
+
+});

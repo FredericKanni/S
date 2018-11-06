@@ -3,11 +3,14 @@
 {{> navbar}}
 
 {{> col}}
-{{> cartereservation}}
 
 
 
 
+
+
+
+<!-- {{> listereservation}} -->
 
 {{> jumbotron}}
 
@@ -21,6 +24,16 @@
 
 
 
+<div class="">
+    
+    <section class="bg-red py-5" id="Atelier">
+        <h2 class="text-center">LISTES DES RESERVATIONS</h2>
+        {{> cartereservation}}
+   </section>
+
+    
+      
+    </div>
 <!-- {{#unless currentUser}}
 {{> atForm}}
 {{/unless}} -->
@@ -44,7 +57,6 @@
 
 
 {{#unless currentUser}}
-
 
 <section class="bg-red rounded-bottom">
     <div class="container d-flex justify-content-center">
@@ -78,27 +90,27 @@
                 <form class="new-atelier">
 
 
-                        <input class="form-control  my-2" type="text" name="nomcuisinier" placeholder="Nom du cuisinier"/>
+                        <input class="form-control  my-2" type="text" name="modal1nomcuisinier" placeholder="Nom du cuisinier"/>
         
-                        <input class="form-control  my-2" type="text" name="prenomcuisinier" placeholder="Prénom du cuisinier"/>
+                        <input class="form-control  my-2" type="text" name="modal1prenomcuisinier" placeholder="Prénom du cuisinier"/>
         
-                        <input class="form-control  my-2" type="text" name="spécialitécuisinier" placeholder="Spécialité du cuisinier"/>
+                        <input class="form-control  my-2" type="text" name="modal1spécialitécuisinier" placeholder="Spécialité du cuisinier"/>
 
-                        <input class="form-control  my-2" type="text" name="title" placeholder="Nom de l'atelier"/>
+                        <input class="form-control  my-2" type="text" name="modal1title" placeholder="Nom de l'atelier"/>
         
-                        <input class="form-control  my-2" type="text" name="text" placeholder="Un descriptif"/>
+                        <input class="form-control  my-2" type="text" name="modal1text" placeholder="Un descriptif"/>
         
-                        <input class="form-control  my-2" type="text" name="date" placeholder="Entrer la date"/>
+                        <input class="form-control  my-2" type="text" name="modal1date" placeholder="Entrer la date"/>
             
-                        <input class="form-control  my-2" type="text" name="horaire" placeholder="Entrer l'heure de début"/>
+                        <input class="form-control  my-2" type="text" name="modal1horaire" placeholder="Entrer l'heure de début"/>
         
-                        <input class="form-control  my-2" type="text" name="duree" placeholder="Entrer la duree"/>
+                        <input class="form-control  my-2" type="text" name="modal1duree" placeholder="Entrer la duree"/>
             
-                        <input class="form-control  my-2" type="text" name="dispo" placeholder="Le nombre de places disponibles"/>
+                        <input class="form-control  my-2" type="text" name="modal1dispo" placeholder="Le nombre de places disponibles"/>
             
-                        <input class="form-control  my-2" type="text" name="prix" placeholder="Entrer le prix"/>
+                        <input class="form-control  my-2" type="text" name="modal1prix" placeholder="Entrer le prix"/>
         
-                        <input class="form-control  my-2" type="text" name="image" placeholder="Entrer une image"/> 
+                        <input class="form-control  my-2" type="text" name="modal1image" placeholder="Entrer une image"/> 
 
                         <!-- <input type="hidden" id="edit-id" name="editId"/> -->
                     
@@ -126,32 +138,34 @@
                 </button>
                 </div>
                 <div class="modal-body">
-    
+                   
                     <form class="save">
 
-                            <input class="form-control  my-2" type="text" name="Enomcuisinier" id="editnomcuisinier" placeholder="Nom du cuisinier"/>
+                            <input class="form-control  my-2" type="text" name="modal2nomcuisinier" id="editnomcuisinier" placeholder="Nom du cuisinier"/>
         
-                            <input class="form-control  my-2" type="text" name="Eprenomcuisinier" id="editprenomcuisinier" placeholder="Prénom du cuisinier"/>
+                            <input class="form-control  my-2" type="text" name="modal2prenomcuisinier" id="editprenomcuisinier" placeholder="Prénom du cuisinier"/>
             
-                            <input class="form-control  my-2" type="text" name="Espécialitécuisinier" id="editspécialitécuisinier" placeholder="Spécialité du cuisinier"/>
+                            <input class="form-control  my-2" type="text" name="modal2spécialitécuisinier" id="editspécialitécuisinier" placeholder="Spécialité du cuisinier"/>
     
-                            <input class="form-control  my-2" type="text" name="Etitle" id="editTitle" placeholder="Nom de l'atelier"/>
+                            <input class="form-control  my-2" type="text" name="modal2title" id="editTitle" placeholder="Nom de l'atelier"/>
             
-                            <input class="form-control  my-2" type="text" name="Etext" id="editText" placeholder="Un descriptif"/>
+                            <input class="form-control  my-2" type="text" name="modal2text" id="editText" placeholder="Un descriptif"/>
             
-                            <input class="form-control  my-2" type="text" name="Edate" id="editDate" placeholder="Entrer la date"/>
+                            <input class="form-control  my-2" type="text" name="modal2date" id="editDate" placeholder="Entrer la date"/>
                 
-                            <input class="form-control  my-2" type="text" name="Ehoraire" id="editHoraire" placeholder="Entrer l'heure de début"/>
+                            <input class="form-control  my-2" type="text" name="modal2horaire" id="editHoraire" placeholder="Entrer l'heure de début"/>
             
-                            <input class="form-control  my-2" type="text" name="Eduree" id="editDuree" placeholder="Entrer la duree"/>
+                            <input class="form-control  my-2" type="text" name="modal2duree" id="editDuree" placeholder="Entrer la duree"/>
                 
-                            <input class="form-control  my-2" type="text" name="Edispo" id="editDispo" placeholder="Le nombre de places disponibles"/>
+                            <input class="form-control  my-2" type="text" name="modal2dispo" id="editDispo" placeholder="Le nombre de places disponibles"/>
                 
-                            <input class="form-control  my-2" type="text" name="Eprix" id="editPrix" placeholder="Entrer le prix"/>
+                            <input class="form-control  my-2" type="text" name= "modal2prix" id="editPrix" placeholder="Entrer le prix"/>
             
-                            <input class="form-control  my-2" type="text" name="Eimage" id="editImage" placeholder="Entrer une image"/> 
+                            <input class="form-control  my-2" type="text" name="modal2image" id="editImage" placeholder="Entrer une image"/> 
     
                             <input type="hidden" id="edit-id" name="editId"/>
+
+                            <input type="hidden" id="edit-ownerid" name="editownerid"/>
                         
                             <button type="submit" class="btn btn-primary">Sauvegarder</button>
                                 
@@ -240,5 +254,11 @@
     <!-- <button class="btn btn-xs btn-default js-logout"> Se déconnecter</button> -->
     {{> atelier}}
 
+   
+</template>
+
+
+<template name="listereservation">
+  
    
 </template>
