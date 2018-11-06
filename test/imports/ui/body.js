@@ -71,7 +71,10 @@ Template.body.events({
 
 
      'click .del': function(event) {
-      const target = event.target;
+
+      const hidden = document.querySelector('#edit-id');
+      this._id=hidden.value ;
+      
     Ateliers.remove(this._id);
   },
 
@@ -97,8 +100,8 @@ Template.body.events({
       const dispo = target.dispo.value;
       const prix = target.prix.value;
       const image = target.image.value;
- 
-
+      const max = target.dispo.value;
+      const reserve = 0;
       // console.log(atnomcuisinier);
       // console.log(atprenomcuisinier);
       //   console.log(atspécialitécuisinier);
@@ -118,6 +121,8 @@ Template.body.events({
         horaire,
         duree,
         dispo,
+        reserve,
+        max,
         prix,
         image,
         checked:true,//fait que le checkbox de l atelier soit cocher 
@@ -173,13 +178,37 @@ Template.body.events({
       // console.log(Tel);
      
       // console.log(Email);
-      console.log(Place);
+      // console.log(Place);
       // console.log(idAtelier);
       // Insert a task into the collection
-     
-      if( parseInt(Place) < parseInt(Placedispo)){
-        console.log('grand');
-        alert("Hello! I am an alert box!");
+      // parseInt(reserve)
+      // parseInt(dispo)=  parseInt(dispo) - parseInt(Place);
+      // parseInt(reserve) =   parseInt(reserve) + parseInt(Place);
+
+      const tdispo =  parseInt(atelier.dispo) - parseInt(Place);
+      const treserve =   parseInt(atelier.reserve) + parseInt(Place);
+
+      console.log(tdispo);
+      console.log(treserve);
+
+      if( parseInt(Place) <= parseInt(Placedispo)){
+        
+        Ateliers.update(idAtelier, {
+          $set:{ dispo: tdispo, reserve: treserve, 
+          }
+          });
+        console.log('reservation reussi');
+         alert("reservation reussie!");
+// Mise à jour de la collection
+
+
+
+
+
+      }
+      if( parseInt(Place) > parseInt(Placedispo)){
+        alert("Pas assez de places disponibles!");
+
       }
 // const dispo =  atelier.dispo - Place;
 // console.log(dispo);
@@ -297,8 +326,16 @@ Template.modal2.events({
     }
   });
 
+//jaideplacer le buttan qui etais dans accuiel dans la navbar
+  // Template.accueil.events({
 
-  Template.accueil.events({
+  //   'click .js-logout'(event,instance) {
+  //   Meteor.logout();
+
+  //   },
+  // });
+
+  Template.navbar.events({
 
     'click .js-logout'(event,instance) {
     Meteor.logout();

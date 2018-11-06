@@ -21,9 +21,9 @@
 
 
 
-{{#unless currentUser}}
+<!-- {{#unless currentUser}}
 {{> atForm}}
-{{/unless}}
+{{/unless}} -->
 
 {{#if currentUser}}
 {{> accueil}}
@@ -41,6 +41,24 @@
 </section>
 
 {{/if}}
+
+
+{{#unless currentUser}}
+
+
+<section class="bg-red rounded-bottom">
+    <div class="container d-flex justify-content-center">
+        <div class="row my-4">
+            {{#each desactive}}
+                <div class="col-sm my-2">
+                    {{> carte}}
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</section>
+
+{{/unless}}
 
 
 
@@ -219,7 +237,7 @@
 
 
 <template name="accueil">
-    <button class="btn btn-xs btn-default js-logout"> Se déconnecter</button>
+    <!-- <button class="btn btn-xs btn-default js-logout"> Se déconnecter</button> -->
     {{> atelier}}
 
    

@@ -14,12 +14,21 @@
                     <a class="nav-item nav-link" href="#Jumbo">Présentation</a>
                     <a class="nav-item nav-link" href="#Atelier">Atelier</a>
                     <a class="nav-item nav-link" href="#Contact">Contact</a>
-                    <a class="nav-item nav-link" href="" data-toggle="collapse" data-target="#demo"  >Se Connecter</a>
+
+                    {{#if currentUser}}
+                    <a class="nav-item nav-link  js-logout" href="" data-toggle="collapse" data-target=""  >Se Déconnecter</a>
+                    {{/if}}
+                 
+                   
+                     {{#unless currentUser}}
+                     <a class="nav-item nav-link" href="" data-toggle="collapse" data-target="#demo"  >Se Connecter</a>
+                      {{/unless}}
                   </div>
                 </div>
             </div>
               </nav>
 </template>
+
 
 
 <template name="col">
