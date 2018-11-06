@@ -10,30 +10,16 @@ import { Ateliers } from '../api/Ateliers.js';
 import { Reserves } from '../api/Reserves.js';
 
 
-
 Template.carte.events({
   'click .delres': function() {
   Reserves.remove(this._id);
 },
-
-
 });
-
-
-
-
-
 Template.body.helpers({
     ateliers: function(){
         // return Ateliers.find().fetch(); 
         return Ateliers.find({ownerId: Meteor.userId()}).fetch(); 
     },
-
-
-
-
-
-    
 
     ateliersparticulier: function(){
       // return Ateliers.find().fetch(); 
@@ -41,20 +27,9 @@ Template.body.helpers({
   },
 
   desactive() {
-
-  //$ne:true cest nest pas egal a vrai  $ne: cest la negation 
-    //retourne les atelier qui ont checked qui ne sont pas true 
-    // return Ateliers.find( {  checked: { $ne: true } });
-     //renvoir les atelier active
     return Ateliers.find( {  checked: { $ne: false } });
   },
   ct() {
-
-    // return Ateliers.find( ownerId).count();
-    // return Ateliers.find({ ownerId: Meteor.userId(), checked: { $ne: true } }).count();
-    //renvoir le nbr  datelier desactive
-    // return Ateliers.find( {  checked: { $ne: true } }).count();
-     //renvoir le nbr  datelier active
     return Ateliers.find( {  checked: { $ne: false } }).count();
   },
 
@@ -90,14 +65,10 @@ Template.body.events({
       event.preventDefault();
   
       // Get value from form element
-
-      
       const target = event.target;
-
       const nomcuisinier= target.modal1nomcuisinier.value;
       const prenomcuisinier = target.modal1prenomcuisinier.value;
       const spécialitécuisinier = target.modal1spécialitécuisinier.value;
-
       const title= target.modal1title.value;
       const text = target.modal1text.value;
       const date = target.modal1date.value;
@@ -108,11 +79,6 @@ Template.body.events({
       const image = target.modal1image.value;
       const max = target.modal1dispo.value;
       const reserve = 0;
-      // console.log(atnomcuisinier);
-      // console.log(atprenomcuisinier);
-      //   console.log(atspécialitécuisinier);
-      // Insert a task into the collection
-
       $('#exampleModal').modal('hide')
 
       Ateliers.insert({
@@ -133,16 +99,9 @@ Template.body.events({
         image,
         checked:true,//fait que le checkbox de l atelier soit cocher 
         ownerId:Meteor.userId(),
-
         createdAt: new Date(), // current time
-
-        
-  
       });
-
       // Clear form
-
-
        target.modal1nomcuisinier.value= '';
        target.modal1prenomcuisinier.value= '';
       target.modal1spécialitécuisinier.value= '';
@@ -156,17 +115,12 @@ Template.body.events({
       target.modal1prix.value = '';
       target.modal1image.value = '';
     },
-
     /************************/
-
     'submit .new-reserve'(event) {
-  
       // Prevent default browser form submit
       event.preventDefault();
       const hidden2 = document.querySelector('#edit-ownerid');
       ownerId=hidden2.value;
-
-
       const hidden = document.querySelector('#edit-id');
       idAtelier=hidden.value;
       const atelier = Ateliers.findOne({_id:hidden.value});
@@ -177,31 +131,11 @@ Template.body.events({
       const Tel = target.Tel.value;
       const Email = target.Email.value;
       const Place = target.Place.value;
-
       const Placedispo = atelier.dispo;
-      console.log(atelier.dispo);
-      // console.log(target);
-      // console.log(Name);
-
-      // console.log(Prenom);
-      // console.log(Tel);
-     
-      // console.log(Email);
-      // console.log(Place);
-      // console.log(idAtelier);
-      // Insert a task into the collection
-      // parseInt(reserve)
-      // parseInt(dispo)=  parseInt(dispo) - parseInt(Place);
-      // parseInt(reserve) =   parseInt(reserve) + parseInt(Place);
-
       const tdispo =  parseInt(atelier.dispo) - parseInt(Place);
       const treserve =   parseInt(atelier.reserve) + parseInt(Place);
 
-      console.log(tdispo);
-      console.log(treserve);
-
       if( parseInt(Place) <= parseInt(Placedispo)){
-        
         Ateliers.update(idAtelier, {
           $set:{ dispo: tdispo, reserve: treserve, 
           }
@@ -209,18 +143,11 @@ Template.body.events({
         console.log('reservation reussi');
          alert("reservation reussie!");
 // Mise à jour de la collection
-
-
-
-
-
       }
       if( parseInt(Place) > parseInt(Placedispo)){
         alert("Pas assez de places disponibles!");
 
       }
-// const dispo =  atelier.dispo - Place;
-// console.log(dispo);
       Reserves.insert({
         
         Name,
@@ -231,32 +158,23 @@ Template.body.events({
         idAtelier,
         ownerId,
         createdAt: new Date(), // current time
-  
       });
-
       // Clear form
       target.Name.value = '';
       target.Prenom.value = '';
       target.Tel.value = '';
       target.Email.value = '';
       target.Place.value = ''; 
-      
     },
-
     /********************* */
-
      //Update
      'submit .save'(event){
         event.preventDefault();
-
         //Récupère valeur dans l'élément form (formulaire)
         const target = event.target;
-console.log(target);
         const savenomcuisinier = target.modal2nomcuisinier.value;
         const saveprenomcuisinier = target.modal2prenomcuisinier.value;
         const savespécialitécuisinier = target.modal2spécialitécuisinier.value;
-
-        console.log(target);
         const savetitle = target.modal2title.value;
         const savetext = target.modal2text.value;
         const savedate = target.modal2date.value;
@@ -266,15 +184,14 @@ console.log(target);
         const saveprix = target.modal2prix.value;
         const saveimage = target.modal2image.value
         const id = target.editId.value;
-        
         //Mise à jour de la collection
         Ateliers.update(id, {
           $set:{title: savetitle,
-             text: savetext,
-              horaire: savehoraire, 
-              duree: saveduree, 
-              date: savedate, 
-              dispo: savedispo, 
+            text: savetext,
+            horaire: savehoraire, 
+            duree: saveduree, 
+            date: savedate, 
+            dispo: savedispo, 
             prix: saveprix, 
             image: saveimage,
             nomcuisinier:savenomcuisinier,
@@ -285,25 +202,13 @@ console.log(target);
 
           $('#exampleModal2').modal('hide')
     },
-  
   });
-
-  //Permet d'effacer element: db
-  Template.carte.events({
-  //   'click .delete': function() {
-  //   Ateliers.remove(this._id);
-  // }
-
-});
-
 Template.modal2.events({
     'click .edit': function(event) {
-      
       //Récupère l'identifiant de la valeur
       const target = event.target;
       const idAtelier = target.getAttribute('data-id');
       const atelier = Ateliers.findOne({_id:idAtelier});
-      
       //Selectionnne l'id de la cellule
       const one = document.querySelector('#editTitle');
       const two = document.querySelector('#editText');
@@ -313,15 +218,10 @@ Template.modal2.events({
       const six = document.querySelector('#editDispo');
       const eight = document.querySelector('#editPrix');
       const nime = document.querySelector('#editImage');
-
       const ten = document.querySelector('#editnomcuisinier');
       const eleven = document.querySelector('#editprenomcuisinier');
       const twelve = document.querySelector('#editspécialitécuisinier');
-
-
-
       const id = document.querySelector('#edit-id');
-  
       //Insert les valeurs de la collection dans la cellule
       one.value = atelier.title; 
       two.value = atelier.text;
@@ -331,142 +231,50 @@ Template.modal2.events({
       six.value = atelier.dispo;
       eight.value = atelier.prix;
       nime.value = atelier.image;
-
       ten.value = atelier.nomcuisinier;
       eleven.value = atelier.prenomcuisinier;
       twelve.value = atelier.spécialitécuisinier;
-
-    
-      
-
-
       id.value = idAtelier;
-
     }
   });
 
-//jaideplacer le buttan qui etais dans accuiel dans la navbar
-  // Template.accueil.events({
-
-  //   'click .js-logout'(event,instance) {
-  //   Meteor.logout();
-
-  //   },
-  // });
-
   Template.navbar.events({
-
     'click .js-logout'(event,instance) {
     Meteor.logout();
-
     },
   });
-
-
-
-
 //QUAND ON CLICK SUR LE BTN RESERVE DE LA CARTE RECUPERE L ID DE LA CARTE ET LA STOCK
   Template.carte.events({
     'click .res': function(event) {
     // Reserves.remove(this._id);
     const target = event.target;
-    console.log(target);
-    console.log(this._id);
-
     const hidden = document.querySelector('#edit-id');
     hidden.value =this._id;
-
-
     const atelier = Ateliers.findOne({_id:hidden.value});
-    console.log(atelier.dispo);
-    console.log(atelier.ownerId);
     const hidden2 = document.querySelector('#edit-ownerid');
     hidden2.value=atelier.ownerId;
-
-
-
   },
-
-
-
-
-
-  'click .delete': function(event) {
-    // Reserves.remove(this._id);
-    const target = event.target;
-    console.log(target);
-    console.log(this._id);
-
-    const hidden = document.querySelector('#edit-id');
-    hidden.value =this._id;
-
-
-    // const atelier = Ateliers.findOne({_id:hidden.value});
-    // console.log(atelier.dispo);
-  },
-  
-  
+    'click .delete': function(event) {
+      // Reserves.remove(this._id);
+      const target = event.target;
+      const hidden = document.querySelector('#edit-id');
+      hidden.value =this._id;
+    },
   });
-
-
-
-
-
-
-
   Template.carte.events({
 
     'click .toggle-checked'(event) {
   
       const target = event.target;
-       console.log(target);
       const suivanttarget = event.target.nextSibling;
-     console.log(suivanttarget);
-      
-      // Set the checked property to the opposite of its current value
-//  console.log('checkbox');
- console.log(this.checked);
       Ateliers.update(this._id, {
-  
         $set: { checked: ! this.checked },
-  
       });
-      // console.log('updatedchecked');
-      // console.log(this.checked);
     },
-  
   });
-  
-
-
-
-  
 Template.cartereservation.events({
-
   'click .delres'(event) {
-
     const target = event.target;
-     console.log(target);
-     console.log(this._id);
-     Reserves.remove(this._id);
-
-
-
-
-     
-  //   const suivanttarget = event.target.nextSibling;
-  //  console.log(suivanttarget);
-    
-    // Set the checked property to the opposite of its current value
-//  console.log('checkbox');
-// console.log(this.checked);
-//     Ateliers.update(this._id, {
-
-//       $set: { checked: ! this.checked },
-
-//     });
-    // console.log('updatedchecked');
-    // console.log(this.checked);
+    Reserves.remove(this._id);
   },
-
 });
